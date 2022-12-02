@@ -1,0 +1,34 @@
+@import "../../styles/variables.scss";
+
+.modal_window {
+  display: inline-block;
+  position: absolute;
+  top: calc((30% + 50%) / 2);
+  left: -10%;
+  width: 120%;
+  min-height: 30%;
+  background-color: $color0;
+  border-radius: $base-radius;
+  box-shadow: 15px 10px 10px $color2;
+  .modal_window_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: $base-padding;
+    .modal_input {
+      margin: 1rem;
+      background-color: $color2;
+      outline: none;
+      border: none;
+    }
+    .modal_btn_submit {
+      margin: 1rem;
+      background-color: $color2;
+    }
+  }
+}
+.modal_window_disable {
+  display: none;
+}

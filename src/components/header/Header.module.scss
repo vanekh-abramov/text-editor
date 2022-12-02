@@ -1,0 +1,17 @@
+@import "../../styles/variables.scss";
+
+.header {
+  width: 100%;
+  padding: $base-padding;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color0;
+  color: $color1;
+  border-radius: $base-radius;
+  .header_title {
+    padding: $base-padding;
+    background-color: $color2;
+    border-radius: $base-radius;
+  }
+}

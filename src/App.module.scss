@@ -1,0 +1,52 @@
+@import "./styles/variables.scss";
+
+.container {
+  position: relative;
+  width: 60vw;
+  height: 80vh;
+  margin: 5rem auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .todo_wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80%;
+    overflow-y: auto;
+    .todo_card {
+      margin: 1rem 0;
+      padding: $base-padding;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border: 1px solid $color0;
+      .card_head {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .delete_btn {
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+          transition: transform 0.3s linear;
+          &:hover {
+            transform: scale(1.5);
+          }
+        }
+      }
+      .todo_tag_wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        .todo_tag {
+          margin-right: 0.5rem;
+          padding: 0.3rem 0.5rem;
+          background-color: $color2;
+          color: $color1;
+          border-radius: $base-radius;
+        }
+      }
+    }
+  }
+}

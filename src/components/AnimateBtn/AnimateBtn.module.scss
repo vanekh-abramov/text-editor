@@ -1,0 +1,53 @@
+@import "../../styles/variables.scss";
+
+.modal_btn {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: #2f195f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  .stick1 {
+    position: absolute;
+    left: 5px;
+    width: 2rem;
+    height: 0.3rem;
+    background-color: #faa6ff;
+    transform: rotate(90deg);
+    transition: transform 0.3s linear;
+  }
+  .stick2 {
+    position: absolute;
+    left: 5px;
+    width: 2rem;
+    height: 0.3rem;
+    background-color: #faa6ff;
+    transform: rotate(360deg);
+    transition: transform 0.4s linear;
+  }
+}
+.modal_btn_active {
+  transition: all 0.3s linear;
+  .stick1 {
+    position: absolute;
+    left: 5px;
+    width: 2rem;
+    height: 0.3rem;
+    background-color: #faa6ff;
+    transform: rotate(45deg);
+  }
+  .stick2 {
+    position: absolute;
+    left: 5px;
+    width: 2rem;
+    height: 0.3rem;
+    background-color: #faa6ff;
+    transform: rotate(-45deg);
+  }
+}
