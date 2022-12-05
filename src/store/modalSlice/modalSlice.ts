@@ -1,11 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// type Todo = {
-//   id: string;
-//   title: string;
-//   completed: boolean;
-// }
-
 type ModalState = {
   modal: boolean;
 };
