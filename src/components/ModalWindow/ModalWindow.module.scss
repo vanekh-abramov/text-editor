@@ -19,13 +19,21 @@
     padding: $base-padding;
     .modal_input {
       margin: 1rem;
-      background-color: $color2;
+      background-color: $color1;
+      color: $color2;
       outline: none;
       border: none;
     }
     .modal_btn_submit {
+      font-size: 1rem;
       margin: 1rem;
-      background-color: $color2;
+      width: 50%;
+      height: 20%;
+      background-color: $color1;
+      color: $color2;
+    }
+    .modal_btn_err {
+      color: #ff0000;
     }
   }
 }

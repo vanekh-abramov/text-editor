@@ -10,7 +10,7 @@ interface todosState {
 
 const initialState: todosState = {
   data: [],
-  status: false,
+  status: true,
   error: "",
 };
 
@@ -18,6 +18,9 @@ export const TodoSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
+    addTodo(state, action) {
+      state.data.push(action.payload);
+    },
     removeTodo(state, action) {
       state.data = state.data.filter((data) => data.id !== action.payload);
     },
@@ -39,5 +42,5 @@ export const TodoSlice = createSlice({
   },
 });
 
-export const { removeTodo } = TodoSlice.actions;
+export const { addTodo, removeTodo } = TodoSlice.actions;
 export default TodoSlice.reducer;

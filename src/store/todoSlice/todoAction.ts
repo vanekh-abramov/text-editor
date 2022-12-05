@@ -8,7 +8,6 @@ export const getTodo = createAsyncThunk<IData[]>(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get<IData[]>(TODO);
-      console.log(response.data);
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error);
@@ -25,6 +24,18 @@ export const delTodo = createAsyncThunk(
       });
       return response;
     } catch (error: any) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const createTodo = createAsyncThunk(
+  "todos/createTodo",
+  async (todos: IData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(TODO, todos);
+      console.log(response);
+    } catch (error) {
       return rejectWithValue(error);
     }
   }

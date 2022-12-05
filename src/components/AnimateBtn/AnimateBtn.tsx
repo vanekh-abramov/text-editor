@@ -10,7 +10,7 @@ type Props = {
 const AnimateBtn = ({ onClickFunc, dependence }: Props) => {
   return (
     <button
-      className={cl(s.modal_btn, { [s.modal_btn_active]: dependence === true })}
+      className={cl(s.modal_btn, { [s.modal_btn_active]: dependence })}
       onClick={onClickFunc}
     >
       <div className={s.stick1}></div>
