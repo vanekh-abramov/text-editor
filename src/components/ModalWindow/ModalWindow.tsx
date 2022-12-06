@@ -6,13 +6,13 @@ import { useAppDispatch } from "./../../hooks/reduxHooks";
 import { IData } from "./../../models/models";
 import { v4 as uuidv4 } from "uuid";
 import { setToggleModal } from "../../store/modalSlice/modalSlice";
-import { createTodo } from "./../../store/todoSlice/todoAction";
-import { addTodo } from "../../store/todoSlice/todoSlice";
+import { createTodo, putTodo } from "./../../store/todoSlice/todoAction";
+import { addTodo, editTodo } from "../../store/todoSlice/todoSlice";
 
-const ModalWindow = () => {
+const ModalWindow = (data) => {
   const dispatch = useAppDispatch();
   const modal = useAppSelector((state) => state.modal.modal);
-  const { data } = useAppSelector((state) => state.todos);
+  // const { data } = useAppSelector((state) => state.todos);
 
   const [inpTitle, setInpTitle] = useState("");
   const [inpContent, setInputContent] = useState("");
@@ -26,8 +26,6 @@ const ModalWindow = () => {
     content: inpContent,
     tag: dataTags,
   };
-
-  console.log(data.length + 1);
 
   const setTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setInpTitle(e.target.value);
@@ -46,8 +44,19 @@ const ModalWindow = () => {
   };
 
   const sendData = () => {
-    if (!inpTitle.trim().length || !inpContent.trim().length) {
-      setInpError(true);
+    // if (!inpTitle.trim().length || !inpContent.trim().length) {
+    //   setInpError(true);
+    // } else
+    if (data.data) {
+      const par = { id: data.data[0].id, todos: newData };
+      console.log("MODAL", data.data[0].id);
+      setInpError(false);
+      setInpTitle("");
+      setInputContent("");
+      setDataTags([]);
+      dispatch(putTodo(par));
+      // dispatch(editTodo(newData));
+      dispatch(setToggleModal(!modal));
     } else {
       setInpError(false);
       setInpTitle("");
@@ -71,6 +80,7 @@ const ModalWindow = () => {
           type='text'
           name='title'
           id='title'
+          placeholder='Title'
           className={s.modal_input}
           value={inpTitle}
           onChange={(e) => setTitle(e)}
@@ -79,6 +89,7 @@ const ModalWindow = () => {
           type='text'
           name='content'
           id='content'
+          placeholder='Content'
           className={s.modal_input}
           value={inpContent}
           onChange={(e) => setContent(e)}
@@ -88,6 +99,7 @@ const ModalWindow = () => {
             type='text'
             name='content'
             id='content'
+            placeholder='#Tag'
             className={s.modal_input}
             value={inpTag}
             onChange={(e) => setTag(e)}
@@ -102,7 +114,7 @@ const ModalWindow = () => {
           onClick={sendData}
           disabled={inpError}
         >
-          {!inpError ? "Submit" : "Fields can`t be empty"}
+          {!inpError ? "Add new todo" : "Fields can`t be empty"}
         </button>
       </div>
     </div>

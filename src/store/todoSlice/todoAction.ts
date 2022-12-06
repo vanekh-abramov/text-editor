@@ -3,6 +3,11 @@ import axios from "axios";
 import { TODO } from "./../../contants/externalLinks";
 import { IData } from "./../../models/models";
 
+type incomingPrams = {
+  id: string;
+  todos: IData;
+};
+
 export const getTodo = createAsyncThunk<IData[]>(
   "todos/getTodos",
   async (_, { rejectWithValue }) => {
@@ -19,10 +24,7 @@ export const delTodo = createAsyncThunk(
   "todos/delTodos",
   async (id: string, { rejectWithValue }) => {
     try {
-      const response = await axios.delete<IData[]>(TODO + "/" + id, {
-        method: "DELETE",
-      });
-      return response;
+      await axios.delete(TODO + "/" + id);
     } catch (error: any) {
       return rejectWithValue(error);
     }
@@ -30,11 +32,25 @@ export const delTodo = createAsyncThunk(
 );
 
 export const createTodo = createAsyncThunk(
-  "todos/createTodo",
+  "todos/createTodos",
   async (todos: IData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(TODO, todos);
-      console.log(response);
+      await axios.post(TODO, todos);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const putTodo = createAsyncThunk(
+  "todos/putTodos",
+  async (incoming, { rejectWithValue, dispatch }) => {
+    try {
+      const { id, todos }: incomingPrams | any = incoming;
+      const response = await axios.put(TODO + "/" + id, todos);
+      dispatch(getTodo());
+      console.log(response.data);
+      return response.data;
     } catch (error) {
       return rejectWithValue(error);
     }

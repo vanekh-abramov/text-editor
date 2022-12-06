@@ -6,13 +6,16 @@ import TodoCard from "./components/TodoCard/TodoCard";
 import LoaderUI from "./components/LoaderUI/LoaderUI";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { setToggleModal } from "./store/modalSlice/modalSlice";
-import { useEffect } from "react";
-import { delTodo, getTodo } from "./store/todoSlice/todoAction";
+import { useEffect, useState } from "react";
+import { delTodo, getTodo, putTodo } from "./store/todoSlice/todoAction";
 import { removeTodo } from "./store/todoSlice/todoSlice";
+import { IData } from "./models/models";
 
 function App() {
   const { modal } = useAppSelector((state) => state.modal);
   const { data, status } = useAppSelector((state) => state.todos);
+  const [newData, setNewData] = useState();
+
   const dispatch = useAppDispatch();
 
   const modalToggle = () => {
@@ -28,8 +31,12 @@ function App() {
     dispatch(delTodo(id));
   };
 
-  console.log(data);
-  console.log(status);
+  const editing = (id: string) => {
+    const updData = data.filter((item: IData) => item.id === id);
+    modalToggle();
+    setNewData(updData);
+  };
+
   return (
     <div className={s.container}>
       <Header header_title={"LoGo"} />
@@ -42,11 +49,12 @@ function App() {
             title={title}
             content={content}
             tag={tag}
+            EditFunc={() => editing(id)}
             DeleteFunc={() => removing(id)}
           />
         ))}
       </section>
-      <ModalWindow />
+      <ModalWindow data={newData} />
       <AnimateBtn dependence={modal} onClickFunc={modalToggle} />
     </div>
   );

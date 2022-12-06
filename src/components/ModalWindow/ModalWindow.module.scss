@@ -3,10 +3,9 @@
 .modal_window {
   display: inline-block;
   position: absolute;
-  top: calc((30% + 50%) / 2);
-  left: -10%;
-  width: 120%;
-  min-height: 30%;
+  top: 25%;
+  min-width: 300px;
+  min-height: 300px;
   background-color: $color0;
   border-radius: $base-radius;
   box-shadow: 15px 10px 10px $color2;
@@ -19,15 +18,35 @@
     padding: $base-padding;
     .modal_input {
       margin: 1rem;
+      padding: $base-padding;
+      border-radius: $base-radius;
+      height: 40px;
       background-color: $color1;
       color: $color2;
       outline: none;
       border: none;
     }
+    .tag_wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      .tag_btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: $color1;
+        cursor: pointer;
+        transition: all 0.3s linear;
+        &:hover {
+          transform: scale(1.1);
+          background: rgb(2, 0, 36);
+          background: rgba(15, 207, 27, 1) 45%;
+        }
+      }
+    }
     .modal_btn_submit {
       font-size: 1rem;
       margin: 1rem;
-      width: 50%;
       height: 20%;
       background-color: $color1;
       color: $color2;

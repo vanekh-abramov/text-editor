@@ -6,13 +6,17 @@ type Props = {
   content: string;
   tag: string[];
   DeleteFunc: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  EditFunc: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const TodoCard = ({ id, title, content, tag, DeleteFunc }: Props) => {
+const TodoCard = ({ id, title, content, tag, DeleteFunc, EditFunc }: Props) => {
   return (
     <div className={s.todo_card}>
       <div className={s.card_head}>
         <h3 className={s.card_title}>{title}</h3>
+        <button className={s.edit_btn} id={id} onClick={EditFunc}>
+          EDIT
+        </button>
         <button className={s.delete_btn} onClick={DeleteFunc}>
           &#x274C;
         </button>

@@ -2,12 +2,16 @@
 
 .container {
   position: relative;
-  width: 60vw;
-  height: 80vh;
-  margin: 5rem auto 0;
+  width: 50vw;
+  height: 90vh;
+  margin: 2rem auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 800px) {
+    width: 90vw;
+  }
 
   .todo_wrapper {
     display: flex;

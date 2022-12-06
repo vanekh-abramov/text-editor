@@ -21,6 +21,10 @@ export const TodoSlice = createSlice({
     addTodo(state, action) {
       state.data.push(action.payload);
     },
+    // editTodo(state, action) {
+    //   const newData = state.data.filter((data) => data.id === action.payload);
+    //   state.data.push(newData);
+    // },
     removeTodo(state, action) {
       state.data = state.data.filter((data) => data.id !== action.payload);
     },
