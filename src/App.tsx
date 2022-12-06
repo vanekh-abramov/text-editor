@@ -7,14 +7,14 @@ import LoaderUI from "./components/LoaderUI/LoaderUI";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { setToggleModal } from "./store/modalSlice/modalSlice";
 import { useEffect, useState } from "react";
-import { delTodo, getTodo, putTodo } from "./store/todoSlice/todoAction";
+import { delTodo, getTodo } from "./store/todoSlice/todoAction";
 import { removeTodo } from "./store/todoSlice/todoSlice";
 import { IData } from "./models/models";
 
 function App() {
   const { modal } = useAppSelector((state) => state.modal);
   const { data, status } = useAppSelector((state) => state.todos);
-  const [newData, setNewData] = useState();
+  const [newData, setNewData] = useState<IData[] | undefined>();
 
   const dispatch = useAppDispatch();
 
@@ -34,7 +34,8 @@ function App() {
   const editing = (id: string) => {
     const updData = data.filter((item: IData) => item.id === id);
     modalToggle();
-    setNewData(updData);
+    setNewData(updData as IData[]);
+    console.log(updData);
   };
 
   return (

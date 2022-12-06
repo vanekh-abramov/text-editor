@@ -7,13 +7,15 @@ import { IData } from "./../../models/models";
 import { v4 as uuidv4 } from "uuid";
 import { setToggleModal } from "../../store/modalSlice/modalSlice";
 import { createTodo, putTodo } from "./../../store/todoSlice/todoAction";
-import { addTodo, editTodo } from "../../store/todoSlice/todoSlice";
+import { addTodo } from "../../store/todoSlice/todoSlice";
 
-const ModalWindow = (data) => {
+type Props = {
+  data: IData[] | undefined;
+};
+
+const ModalWindow = ({ data }: Props) => {
   const dispatch = useAppDispatch();
   const modal = useAppSelector((state) => state.modal.modal);
-  // const { data } = useAppSelector((state) => state.todos);
-
   const [inpTitle, setInpTitle] = useState("");
   const [inpContent, setInputContent] = useState("");
   const [inpTag, setInpTag] = useState("");
@@ -44,18 +46,15 @@ const ModalWindow = (data) => {
   };
 
   const sendData = () => {
-    // if (!inpTitle.trim().length || !inpContent.trim().length) {
-    //   setInpError(true);
-    // } else
-    if (data.data) {
-      const par = { id: data.data[0].id, todos: newData };
-      console.log("MODAL", data.data[0].id);
+    if (!inpTitle.trim().length || !inpContent.trim().length) {
+      setInpError(true);
+    } else if (data) {
+      const par = { id: data[0].id, todos: newData };
       setInpError(false);
       setInpTitle("");
       setInputContent("");
       setDataTags([]);
       dispatch(putTodo(par));
-      // dispatch(editTodo(newData));
       dispatch(setToggleModal(!modal));
     } else {
       setInpError(false);

@@ -44,12 +44,11 @@ export const createTodo = createAsyncThunk(
 
 export const putTodo = createAsyncThunk(
   "todos/putTodos",
-  async (incoming, { rejectWithValue, dispatch }) => {
+  async (incoming: incomingPrams, { rejectWithValue, dispatch }) => {
     try {
-      const { id, todos }: incomingPrams | any = incoming;
+      const { id, todos } = incoming;
       const response = await axios.put(TODO + "/" + id, todos);
       dispatch(getTodo());
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error);
