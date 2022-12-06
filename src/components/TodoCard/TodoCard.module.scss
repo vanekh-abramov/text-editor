@@ -12,13 +12,27 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    .delete_btn {
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
-      transition: transform 0.3s linear;
-      &:hover {
-        transform: scale(1.5);
+    .controllers {
+      .edit_btn {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        transition: transform 0.3s linear;
+        &:hover {
+          transform: scale(1.5);
+        }
+      }
+      .delete_btn {
+        font-size: 1.5rem;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        transition: transform 0.3s linear;
+        &:hover {
+          transform: scale(1.5);
+        }
       }
     }
   }

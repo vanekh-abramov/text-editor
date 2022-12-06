@@ -32,10 +32,9 @@ function App() {
   };
 
   const editing = (id: string) => {
-    const updData = data.filter((item: IData) => item.id === id);
     modalToggle();
+    let updData = data.filter((item: IData) => item.id === id);
     setNewData(updData as IData[]);
-    console.log(updData);
   };
 
   return (
@@ -55,7 +54,7 @@ function App() {
           />
         ))}
       </section>
-      <ModalWindow data={newData} />
+      <ModalWindow data={newData} setNewData={setNewData} />
       <AnimateBtn dependence={modal} onClickFunc={modalToggle} />
     </div>
   );

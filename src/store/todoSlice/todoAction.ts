@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { TODO } from "./../../contants/externalLinks";
+import { TODO } from "../../constants/externalLinks";
 import { IData } from "./../../models/models";
 
 type incomingPrams = {
