@@ -1,17 +1,17 @@
 import s from "./App.module.scss";
-import Header from "./components/Header/Header";
-import ModalWindow from "./components/ModalWindow/ModalWindow";
-import AnimateBtn from "./components/AnimateBtn/AnimateBtn";
-import TodoCard from "./components/TodoCard/TodoCard";
-import LoaderUI from "./components/LoaderUI/LoaderUI";
+
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { setToggleModal } from "./store/modalSlice/modalSlice";
 import { MouseEvent, useEffect, useState } from "react";
 import { delTodo, getTodo } from "./store/todoSlice/todoAction";
 import { removeTodo } from "./store/todoSlice/todoSlice";
 import { IData } from "./models/models";
+import ModalWindow from "./components/ModalWindow/ModalWindow";
+import AnimateBtn from "./components/AnimateBtn/AnimateBtn";
+import TodoCard from "./components/TodoCard/TodoCard";
+import LoaderUI from "./components/LoaderUI/LoaderUI";
 import TagItem from "./components/TagItem/TagItem";
-// import cl from "classnames";
+import Header from "./components/Header/Header";
 
 function App() {
   const { modal } = useAppSelector((state) => state.modal);
