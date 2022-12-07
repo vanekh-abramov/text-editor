@@ -1,12 +1,11 @@
 import s from "./LoaderUI.module.scss";
 import cl from "classnames";
-import { memo } from "react";
 
 type Props = {
   status: boolean;
 };
 
-const LoaderUI = memo(({ status }: Props) => {
+const LoaderUI = ({ status }: Props) => {
   return (
     <div
       className={cl({
@@ -15,6 +14,6 @@ const LoaderUI = memo(({ status }: Props) => {
       })}
     ></div>
   );
-});
+};
 
 export default LoaderUI;

@@ -2,7 +2,7 @@ import s from "./App.module.scss";
 
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { setToggleModal } from "./store/modalSlice/modalSlice";
-import { memo, MouseEvent, useCallback, useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { delTodo, getTodo } from "./store/todoSlice/todoAction";
 import { removeTodo } from "./store/todoSlice/todoSlice";
 import { IData } from "./models/models";
@@ -11,9 +11,9 @@ import AnimateBtn from "./components/AnimateBtn/AnimateBtn";
 import TodoCard from "./components/TodoCard/TodoCard";
 import LoaderUI from "./components/LoaderUI/LoaderUI";
 import TagItem from "./components/TagItem/TagItem";
-import Header from "./components/Header/Header";
+import Header from "./components/header/Header";
 
-const App = memo(() => {
+const App = () => {
   const { modal } = useAppSelector((state) => state.modal);
   const { data, status } = useAppSelector((state) => state.todos);
 
@@ -43,13 +43,10 @@ const App = memo(() => {
     setNewData(updData as IData[]);
   };
 
-  const toggleTag = useCallback(
-    (tagName: MouseEvent<HTMLSpanElement>, idx: number) => {
-      setActiveTag(idx);
-      setSortedTag((tagName.target as Element).innerHTML.replace("#", ""));
-    },
-    []
-  );
+  const toggleTag = (tagName: MouseEvent<HTMLSpanElement>, idx: number) => {
+    setActiveTag(idx);
+    setSortedTag((tagName.target as Element).innerHTML.replace("#", ""));
+  };
 
   const restartTags = () => {
     dispatch(getTodo());
@@ -94,6 +91,6 @@ const App = memo(() => {
       <AnimateBtn dependence={modal} onClickFunc={modalToggle} />
     </div>
   );
-});
+};
 
 export default App;
