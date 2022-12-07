@@ -11,7 +11,7 @@ import AnimateBtn from "./components/AnimateBtn/AnimateBtn";
 import TodoCard from "./components/TodoCard/TodoCard";
 import LoaderUI from "./components/LoaderUI/LoaderUI";
 import TagItem from "./components/TagItem/TagItem";
-import Header from "./components/header/Header";
+import Header from "./components/Header/Header";
 
 const App = memo(() => {
   const { modal } = useAppSelector((state) => state.modal);
