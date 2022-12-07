@@ -1,5 +1,5 @@
 import s from "./ModalWindow.module.scss";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, memo, useCallback, useState } from "react";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { useAppDispatch } from "./../../hooks/reduxHooks";
 import { IData } from "./../../models/models";
@@ -14,7 +14,7 @@ type Props = {
   setNewData: React.Dispatch<React.SetStateAction<IData[] | undefined>>;
 };
 
-const ModalWindow = ({ data, setNewData }: Props) => {
+const ModalWindow = memo(({ data, setNewData }: Props) => {
   const dispatch = useAppDispatch();
   const modal = useAppSelector((state) => state.modal.modal);
 
@@ -51,17 +51,17 @@ const ModalWindow = ({ data, setNewData }: Props) => {
     setTagTags(tag);
   };
 
-  const setTitle = (e: ChangeEvent<HTMLInputElement>) => {
+  const setTitle = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setInpTitle(e.target.value);
     newTitleTags(e.target.value);
     setInpError(false);
-  };
-  const setContent = (e: ChangeEvent<HTMLInputElement>) => {
+  }, []);
+  const setContent = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setInputContent(e.target.value);
     newContentTags(e.target.value);
     setInpError(false);
-  };
-  const setTag = (e: ChangeEvent<HTMLInputElement>) => {
+  }, []);
+  const setTag = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const rightTag = e.target.value.replace(" ", "");
     if (rightTag.includes("#", 0)) {
       setInpTag(rightTag);
@@ -70,9 +70,9 @@ const ModalWindow = ({ data, setNewData }: Props) => {
     } else {
       setTagWarning(true);
     }
-  };
+  }, []);
 
-  const addNewTag = () => {
+  const addNewTag = useCallback(() => {
     const newSet = new Set([
       ...dataTags,
       ...titleTags,
@@ -82,7 +82,7 @@ const ModalWindow = ({ data, setNewData }: Props) => {
     const uniqTags = Array.from(newSet);
     setDataTags(uniqTags);
     setInpTag("");
-  };
+  }, [contentTags, dataTags, tagTags, titleTags]);
 
   const sendData = () => {
     if (!inpTitle.trim().length || !inpContent.trim().length) {
@@ -158,6 +158,6 @@ const ModalWindow = ({ data, setNewData }: Props) => {
       </div>
     </div>
   );
-};
+});
 
 export default ModalWindow;

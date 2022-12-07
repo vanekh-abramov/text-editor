@@ -1,5 +1,6 @@
 import cl from "classnames";
 import s from "./TagItem.module.scss";
+import { memo } from "react";
 
 type Props = {
   id: number;
@@ -8,7 +9,7 @@ type Props = {
   ToggleFunc: React.MouseEventHandler<HTMLSpanElement> | undefined;
 };
 
-const TagItem = ({ id, ToggleFunc, activeTag, tag }: Props) => {
+const TagItem = memo(({ id, ToggleFunc, activeTag, tag }: Props) => {
   return (
     <span
       key={id}
@@ -20,6 +21,6 @@ const TagItem = ({ id, ToggleFunc, activeTag, tag }: Props) => {
       {tag}
     </span>
   );
-};
+});
 
 export default TagItem;

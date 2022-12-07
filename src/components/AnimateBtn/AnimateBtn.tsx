@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from "react";
+import React, { memo, MouseEventHandler } from "react";
 import s from "./AnimateBtn.module.scss";
 import cl from "classnames";
 
@@ -7,7 +7,7 @@ type Props = {
   dependence: boolean;
 };
 
-const AnimateBtn = ({ onClickFunc, dependence }: Props) => {
+const AnimateBtn = memo(({ onClickFunc, dependence }: Props) => {
   return (
     <button
       className={cl(s.modal_btn, { [s.modal_btn_active]: dependence })}
@@ -17,6 +17,6 @@ const AnimateBtn = ({ onClickFunc, dependence }: Props) => {
       <div className={s.stick2}></div>
     </button>
   );
-};
+});
 
 export default AnimateBtn;
