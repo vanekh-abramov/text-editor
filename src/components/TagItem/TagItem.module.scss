@@ -1,0 +1,19 @@
+@import "../../styles/variables.scss";
+
+.tag_item {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  padding: $base-padding;
+  border-radius: $base-radius;
+  background-color: $color2;
+  color: $color1;
+  cursor: pointer;
+  transition: all 0.3s linear;
+  &:hover {
+    background-color: $color1;
+    color: $color2;
+  }
+}
+.tag_item_active {
+  background-color: $color1;
+  color: $color2;
+}

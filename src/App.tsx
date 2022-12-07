@@ -6,15 +6,21 @@ import TodoCard from "./components/TodoCard/TodoCard";
 import LoaderUI from "./components/LoaderUI/LoaderUI";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { setToggleModal } from "./store/modalSlice/modalSlice";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { delTodo, getTodo } from "./store/todoSlice/todoAction";
 import { removeTodo } from "./store/todoSlice/todoSlice";
 import { IData } from "./models/models";
+import TagItem from "./components/TagItem/TagItem";
+// import cl from "classnames";
 
 function App() {
   const { modal } = useAppSelector((state) => state.modal);
   const { data, status } = useAppSelector((state) => state.todos);
+
   const [newData, setNewData] = useState<IData[] | undefined>();
+
+  const [activeTag, setActiveTag] = useState(NaN);
+  const [sortedTag, setSortedTag] = useState<string>("");
 
   const dispatch = useAppDispatch();
 
@@ -23,8 +29,8 @@ function App() {
   };
 
   useEffect(() => {
-    dispatch(getTodo());
-  }, [dispatch]);
+    dispatch(getTodo(sortedTag));
+  }, [dispatch, sortedTag]);
 
   const removing = (id: string) => {
     dispatch(removeTodo(id));
@@ -37,11 +43,38 @@ function App() {
     setNewData(updData as IData[]);
   };
 
+  const toggleTag = (tagName: MouseEvent<HTMLSpanElement>, idx: number) => {
+    setActiveTag(idx);
+    setSortedTag((tagName.target as Element).innerHTML.replace("#", ""));
+  };
+
+  const restartTags = () => {
+    dispatch(getTodo());
+    setActiveTag(NaN);
+  };
+
   return (
     <div className={s.container}>
       <Header header_title={"LoGo"} />
       <section className={s.todo_wrapper}>
         <LoaderUI status={status} />
+        <div className={s.tag_wrapper}>
+          <button className={s.tag_restart} onClick={restartTags}>
+            Reset
+          </button>
+          {data
+            ?.map((item) => item.tag)
+            .flat()
+            .map((tag, id) => (
+              <TagItem
+                id={id}
+                tag={tag}
+                ToggleFunc={(tagName) => toggleTag(tagName, id)}
+                activeTag={activeTag}
+                key={id}
+              />
+            ))}
+        </div>
         {data?.map(({ id, title, content, tag }) => (
           <TodoCard
             key={id}

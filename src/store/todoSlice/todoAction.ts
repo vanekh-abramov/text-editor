@@ -8,11 +8,13 @@ type incomingPrams = {
   todos: IData;
 };
 
-export const getTodo = createAsyncThunk<IData[]>(
+export const getTodo = createAsyncThunk(
   "todos/getTodos",
-  async (_, { rejectWithValue }) => {
+  async (tag: string | undefined, { rejectWithValue }) => {
     try {
-      const response = await axios.get<IData[]>(TODO);
+      const response = await axios.get<IData[]>(
+        TODO + (tag ? `?tag_like=${tag}` : "/")
+      );
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error);

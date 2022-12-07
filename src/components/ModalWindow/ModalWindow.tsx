@@ -93,17 +93,17 @@ const ModalWindow = ({ data, setNewData }: Props) => {
       setInputContent("");
       setDataTags([]);
       setInpTitle("");
-      dispatch(putTodo(params));
-      dispatch(setToggleModal(!modal));
+      dispatch(putTodo(params)); //////disp
+      dispatch(setToggleModal(!modal)); //////disp
       setNewData(undefined);
     } else {
       setInpError(false);
       setDataTags([]);
       setInputContent("");
       setInpTitle("");
-      dispatch(addTodo(newData));
-      dispatch(createTodo(newData));
-      dispatch(setToggleModal(!modal));
+      dispatch(addTodo(newData)); //////disp
+      dispatch(createTodo(newData)); //////disp
+      dispatch(setToggleModal(!modal)); //////disp
     }
   };
 
