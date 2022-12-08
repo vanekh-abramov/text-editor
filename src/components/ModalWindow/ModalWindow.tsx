@@ -84,26 +84,34 @@ const ModalWindow = ({ data, setNewData }: Props) => {
     setInpTag("");
   };
 
+  const putEditData = (params: { id: string; todos: IData }) => {
+    setInpError(false);
+    setInputContent("");
+    setDataTags([]);
+    setInpTitle("");
+    dispatch(putTodo(params)); //////disp
+    dispatch(setToggleModal(!modal)); //////disp
+    setNewData(undefined);
+  };
+
+  const postData = () => {
+    setInpError(false);
+    setDataTags([]);
+    setInputContent("");
+    setInpTitle("");
+    dispatch(addTodo(newData)); //////disp
+    dispatch(createTodo(newData)); //////disp
+    dispatch(setToggleModal(!modal)); //////disp
+  };
+
   const sendData = () => {
     if (!inpTitle.trim().length || !inpContent.trim().length) {
       setInpError(true);
     } else if (data) {
       const params = { id: data[0].id, todos: newData };
-      setInpError(false);
-      setInputContent("");
-      setDataTags([]);
-      setInpTitle("");
-      dispatch(putTodo(params)); //////disp
-      dispatch(setToggleModal(!modal)); //////disp
-      setNewData(undefined);
+      putEditData(params);
     } else {
-      setInpError(false);
-      setDataTags([]);
-      setInputContent("");
-      setInpTitle("");
-      dispatch(addTodo(newData)); //////disp
-      dispatch(createTodo(newData)); //////disp
-      dispatch(setToggleModal(!modal)); //////disp
+      postData();
     }
   };
 
